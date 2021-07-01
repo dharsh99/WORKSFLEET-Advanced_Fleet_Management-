@@ -1,0 +1,189 @@
+{% load static %}
+<html>
+	<head>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+		<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+		<link rel="stylesheet" href="{% static 'css/font-awesome/font-awesome.css'%}">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<style>
+			body
+			{
+				background-image:url("{% static 'dist/images1/blackcar.jpg' %}");
+				background-size:100% 100%;
+				background-repeat:no-repeat;
+			}
+			.login-box
+			{
+				position: fixed;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				height:550px;
+				width:400px;
+				box-shadow:0 0 20px -5px #823991;
+				border-radius:5px;
+				background-image: linear-gradient(rgba(237, 234, 241, 0.027), rgba(255,255,255,0.2));
+				padding-top:50px;
+				box-sizing:border-box;
+			}
+			.profile-icon
+			{
+				width:30%;
+				height:auto;
+				margin:auto;
+				display:block;
+				opacity:0.5;
+			}
+			form
+			{
+				margin-top:50px;
+			}
+			::placeholder
+			{ 
+				color:white;
+				opacity:0.7;
+			}
+			input[type=text],input[type=email],input[type=password]
+			{
+				border:1px solid white;
+				padding:2%;
+				margin:auto;
+				display:block;
+				border-radius:3px;
+				width:70%;
+				background-color:transparent;
+				position:relative;
+				outline:none;
+				color:white;
+			}
+			input[type=submit]
+			{
+				border:1px solid white ;
+				padding:2%;
+				margin:auto;
+				display:block;
+				width:70%;
+				font-weight:bold;
+				font-family:'Montserrat';
+				color:white;
+				background-color:transparent ;
+				cursor:pointer;
+				position:relative;
+				top:50px;
+				transition:0.3s;
+			}
+			input[type=submit]:hover
+			{
+				background-color:white ;
+				color:rgba(0,0,0,0.3);
+			}
+			.eyes
+			{
+				width:25px;
+				height:auto;
+				margin:-33px 0 0 280px;
+				cursor:pointer;
+				position:absolute;
+				opacity:0.6;
+				z-index:2;
+			}
+			#eyes-close
+			{
+				display:none;
+			}
+            .h6
+            {   text-align: center;
+                font-size: larger;
+                font-weight: 300;
+                font-style: oblique;
+                color:white;
+				opacity:0.7;
+            }
+			.a
+			{
+				color: white;
+			}
+			.h3 {
+                text-shadow: 2px 2px #ff0000;
+			    text-align: center;
+                font-size: larger;
+                font-weight: 300;
+                font-style: oblique;
+                color:white;
+				opacity:0.7;
+}
+
+			
+
+		</style>
+	</head>
+
+	<body>
+		
+		<div class="h3">
+		<h3 style="color: white;font-style: Arial, Helvetica, sans-serif;text-align: center;">{{msg}}</h3>
+		</div>
+		<div class="container login-box">
+			<div class='a'>
+			<a class="col-12 offset-md-5" href="{% url 'index' %}"> <i class="fa fa-home" >Home</i></a>
+	      	</div>   
+				<img class="profile-icon" src="{% static 'dist/images1/admin1.png' %}">
+                <div class="h6">
+                    <h6>Admin Panel</h6></div>
+				<form action="/Index_Admin_Login" method="POST">
+					{% csrf_token %}
+					<input type="email" placeholder="Email" id="username" name="email_id"><br>
+					<input type="password" placeholder="Password" id="password" name="password">
+					<img src="{% static 'dist/images1/eyeopen.png' %}" class="eyes" id="eyes-open" onclick="Eye()">
+					<img src="{% static 'dist/images1/eyeclose.png' %}" class="eyes" id="eyes-close" onclick="Eye()">
+					<input type="submit" value="SIGNIN" id="login" name="login">  
+				</form>
+			
+				<form action="{% url 'admin_registration' %}">
+				<input type="submit" value="SIGNUP" id="login" name="Registration">  	
+				</form>
+				<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+					
+		</div>
+		<script>
+		function Eye() 
+		{
+			var x = document.getElementById("password");
+			if (x.type === "password") 
+			{
+				x.type = "text";
+				document.getElementById("eyes-close").style.display="block";
+				document.getElementById("eyes-open").style.display="none";
+				
+			} 
+			else 
+			{
+				x.type = "password";
+				document.getElementById("eyes-open").style.display="block";
+				document.getElementById("eyes-close").style.display="none";	
+			}
+		}
+		</script>
+		<body>
+		{% if messages %}
+			 {% for message in messages %}
+			 <script>		
+			 swal({
+			  title: "WORKSFLEET",
+			  text: "LOGIN SUCCESFULLY",
+			  icon: "success"
+		  }).then(function() {
+			  window.location = "index1";
+		  });
+		  
+		  </script>
+			{% endfor %} 
+		  {% endif %} 
+		  
+	</body>
+</html>

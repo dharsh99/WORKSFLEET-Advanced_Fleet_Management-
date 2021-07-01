@@ -1,0 +1,91 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>user Panel</title>
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+  <link rel="stylesheet" href="{% static 'Dist1/style.css' %}">
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  
+</head>
+<body>
+  {% if msg %}
+   {% for messages in msg %}
+   <script>		
+   swal({
+    title: "WORKSFLEET",
+    text: "LOGIN SUCCESFULLY",
+    type: "success"
+}).then(function() {
+    window.location = "user_signin_signup";
+});
+
+</script>
+    {% endfor %} 
+{% endif %} 
+</body>
+<!-- partial:index.partial.html -->
+<p class="tip">User Panel</p>
+<div class="cont">
+  <form action="/Index_User_Login" method="POST">
+    {%csrf_token %}
+  <div class="form sign-in">
+    <h2>Welcome back,</h2>
+    <label>
+      <span>Email</span>
+      <input type="email" name="email">
+    </label>
+    <label>
+      <span>Password</span>
+      <input type="password" name="password">
+    </label>
+     
+    <button type="submit" class="submit">SIGN IN</button>
+  </form>
+  </div>
+  <div class="sub-cont">
+    <div class="img">
+      <div class="img__text m--up">
+        <h2>New here?</h2>
+        <p>Sign up and discover great amount of new opportunities!</p>
+      </div>
+      <div class="img__text m--in">
+        <h2>One of us?</h2>
+        <p>If you already has an account, just sign in. We've missed you!</p>
+      </div>
+      <div class="img__btn">
+        <span class="m--up">Sign Up</span>
+        <span class="m--in">Sign In</span>
+      </div>
+    </div>
+    <form action="/Index_User_Registration" method='POST'>
+      {% csrf_token %}
+    <div class="form sign-up">
+      <h2>User Registration</h2>
+      <label>
+        <span class="text-black-50">Name</span>
+        <input type="text" name="user_name"/>
+      </label>
+      <label>
+        <span>Email</span>
+        <input type="email" name="email"/>
+      </label>
+      <label>
+        <span>Password</span>
+        <input type="password" name="password"/>
+      </label>
+      <button type="submit" class="submit">Sign Up</button>
+     
+    </div>
+    </form>
+  </div>
+</div>
+
+
+<!-- partial -->
+  <script  src="{% static 'Dist1/script.js' %}"></script>
+
+</body>
+</html>
